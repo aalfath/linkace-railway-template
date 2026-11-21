@@ -1,0 +1,18 @@
+{
+    # Railway's edge proxy terminates HTTPS; trust its X-Forwarded-* headers
+    # so LinkAce builds https:// links. Only the edge reaches the public port.
+    servers {
+        trusted_proxies static 0.0.0.0/0 ::/0
+    }
+    admin off
+}
+
+:{$PORT:8080} {
+    root * /app/public
+    encode zstd gzip
+    # The database is prepared at boot (start.sh), so the setup wizard skips its
+    # database form and goes from the requirements check to the admin account.
+    redir /setup/database /setup/account 302
+    php_fastcgi {$CADDY_PHP_HOST:127.0.0.1}:9000
+    file_server
+}
