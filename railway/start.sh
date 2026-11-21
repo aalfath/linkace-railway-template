@@ -8,6 +8,14 @@ if [ -z "${APP_URL:-}" ] && [ -n "${RAILWAY_PUBLIC_DOMAIN:-}" ]; then
   export APP_URL="https://${RAILWAY_PUBLIC_DOMAIN}"
 fi
 
+# LinkAce only answers hosts under APP_URL (Laravel TrustHosts). Also allow
+# Railway's health-check probe, which sends Host: healthcheck.railway.app.
+if [ -z "${TRUSTED_HOSTS:-}" ] && [ -n "${APP_URL:-}" ]; then
+  app_host=$(printf '%s' "$APP_URL" | sed -E 's#^[a-zA-Z]+://##; s#[/:].*$##')
+  app_host_re=$(printf '%s' "$app_host" | sed 's/[].[^$*+?(){}|\\]/\\&/g')
+  export TRUSTED_HOSTS="^(.+\\.)?${app_host_re}\$,^healthcheck\\.railway\\.app\$"
+fi
+
 for v in APP_KEY DB_HOST DB_DATABASE DB_USERNAME DB_PASSWORD REDIS_HOST; do
   eval "val=\${$v:-}"
   if [ -z "$val" ]; then

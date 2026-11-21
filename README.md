@@ -34,6 +34,8 @@ All are set by the template; nothing to fill in.
 | `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` | references to the Postgres service | Private network. |
 | `REDIS_HOST`, `REDIS_PORT`, `REDIS_PASSWORD` | references to the Redis service | Private network. |
 
+`TRUSTED_HOSTS` is derived from `APP_URL` at start (plus Railway's health-check host), so after you add a custom domain, update `APP_URL` and redeploy.
+
 Fixed settings (Postgres driver, Redis cache and sessions, database search, production mode, trusted proxy) are `ENV` lines in the `Dockerfile`; a service variable with the same name overrides them.
 
 Optional, add them on the LinkAce service if you want them:

@@ -15,11 +15,12 @@ ENV PORT=8080 \
     QUEUE_CONNECTION=database \
     APP_SEARCH_DRIVER=database \
     BACKUP_ENABLED=false \
-    CADDY_PHP_HOST=127.0.0.1
+    CADDY_PHP_HOST=127.0.0.1 \
+    GOMAXPROCS=2
 
 USER root
 COPY railway/ /railway/
-# - at most 4 PHP-FPM workers, so it fits a 0.5 GB service
+# - at most 4 PHP-FPM workers and GOMAXPROCS=2 for Caddy, so it fits a 0.5 GB service
 # - LinkAce's own daily backup is off (BACKUP_ENABLED=false): it would zip the app
 #   into the same volume every night; use Railway's volume and Postgres backups
 # - our Caddyfile trusts Railway's edge so links and assets stay https
