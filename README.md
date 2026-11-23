@@ -4,7 +4,7 @@
 
 One-click [LinkAce](https://www.linkace.org) for [Railway](https://railway.com): a self-hosted bookmark archive with tags, lists, notes, link monitoring and the Wayback Machine.
 
-- **LinkAce v2.6.3**, from the official image `linkace/linkace:v2.6.3`, pinned by digest in the [`Dockerfile`](Dockerfile).
+- **LinkAce v2.6.4**, from the official image `linkace/linkace:v2.6.4`, pinned by digest in the [`Dockerfile`](Dockerfile).
 - Licence of LinkAce: GPL-3.0 ([Kovah/LinkAce](https://github.com/Kovah/LinkAce)). This repo only packages it.
 
 ## What the template deploys
