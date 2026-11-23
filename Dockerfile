@@ -1,6 +1,6 @@
 # LinkAce for Railway: web app (Caddy + PHP-FPM) and Laravel scheduler in one container.
 # Official image, pinned by version and digest. Bump both together and add a CHANGELOG.md entry.
-FROM docker.io/linkace/linkace:v2.6.3@sha256:7fad9fb69b421c7428bab8bc820cfd372df4da5f4ff06e9dd1149d20b3e4abd7
+FROM docker.io/linkace/linkace:v2.6.4@sha256:11c8c04833d719e129738cdc2be5b98c85591cae5e6a2085b8e1fc393d3f9a39
 
 # Fixed settings for this template. A variable set on the Railway service wins.
 # They live here (not only in start.sh) so `railway ssh` + artisan sees them too.
